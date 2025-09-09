@@ -1,14 +1,8 @@
-def filter_by_state(get_list_dict: list[dict],
-                    state: str = "EXECUTED") -> list[dict]:
-    """Возвращает отфильтрованный список словарей,
-    где state соответствует заданному значению
-    """
-    pass
+def filter_by_state(transactions: list[dict], state: str = "EXECUTED") -> list[dict]:
+    """Фильтрует транзакции по статусу выполнения"""
+    return [item for item in transactions if item["state"] == state]
 
-def sort_by_date(get_list_dict: list[dict],
-                 reverse: bool = True) -> list[dict]:
-    """принимает список словарей и необязательный параметр,
-    задающий порядок сортировки (по умолчанию — убывание).
-    Функция возвращает новый список словарей,
-    отсортированный по дате (date) """
-    pass
+
+def sort_by_date(transactions: list[dict], reverse: bool = True) -> list[dict]:
+    """Фильтрует транзакции по дате выполнения"""
+    return sorted(transactions, key=lambda x: "".join([item for item in x["date"]]), reverse=reverse)
