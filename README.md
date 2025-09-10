@@ -1,54 +1,45 @@
-# Проект: Фильтрация данных
-## Цель проекта
-Проект предоставляет набор утилит для обработки и анализа банковских транзакций. Включает функции для фильтрации, форматирования и маскирования данных транзакций.
-## Установка:
+# Python Project Lesson 10-1
 
-1. Клонируйте репозиторий:
+Учебный проект по работе с транзакциями: фильтрация и сортировка.
+
+## Возможности
+
+- **Фильтрация транзакций по статусу**  
+  Функция `filter_by_state` оставляет только те операции, у которых статус совпадает с заданным (по умолчанию — `EXECUTED`).
+
+- **Сортировка транзакций по дате**  
+  Функция `sort_by_date` сортирует список операций от новых к старым (по умолчанию) или наоборот.
+
+## Установка
+
+С клонируйте репозиторий и установите зависимости:
+
 ```
 git clone https://github.com/semyon-shtelman/python-project-lesson-10-1.git
 cd python-project-lesson-10-1
-```
-2. Установите зависимости:
-```
 pip install -r requirements.txt
 ```
-## Использование:
-## Основные модули и функции
-Модуль widget.py - Основные функции обработки
-from src.widget import mask_account_card, get_date
+## Использование
+
+Пример работы с функциями:
 ```
-# Маскирование номеров карт и счетов
-masked_card = mask_account_card("Visa Platinum 7000792289606361")
-# Visa Platinum 7000 79** **** 6361
+from processing import filter_by_state, sort_by_date
 
-masked_account = mask_account_card("Счет 73654108430135874305")
-# Счет **4305
+transactions = [
+    {"id": 1, "state": "EXECUTED", "date": "2025-09-01"},
+    {"id": 2, "state": "CANCELED", "date": "2025-08-20"},
+    {"id": 3, "state": "EXECUTED", "date": "2025-09-05"},
+]
 
-# Форматирование даты
-formatted_date = get_date("2024-01-15T10:30:00.000")
-# 15.01.2024
+# Фильтрация только выполненных операций
+executed = filter_by_state(transactions)
+print(executed)
+# [{'id': 1, 'state': 'EXECUTED', 'date': '2025-09-01'},
+#  {'id': 3, 'state': 'EXECUTED', 'date': '2025-09-05'}]
+
+# Сортировка по дате (от новых к старым)
+sorted_tx = sort_by_date(executed)
+print(sorted_tx)
+# [{'id': 3, ...}, {'id': 1, ...}]
+
 ```
-Модуль mask.py - Функции маскирования
-```
-from src.mask import mask_card_number, mask_account_number
-
-masked_card = mask_card_number("7000792289606361")  # 7000 79** **** 6361
-masked_account = mask_account_number("73654108430135874305")  # **4305
-```
-Модуль processing.py - Обработка транзакций
-```
-from src.processing import filter_by_state, sort_by_date
-
-# Фильтрация транзакций по статусу
-executed_transactions = filter_by_state(transactions, 'EXECUTED')
-
-# Сортировка транзакций по дате
-sorted_transactions = sort_by_date(transactions, reverse=True)
-```
-## Документация:
-
-Для получения дополнительной информации обратитесь к [документации](docs/README.md).
-
-## Лицензия:
-
-Этот проект лицензирован по [лицензии MIT](LICENSE).
