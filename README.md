@@ -15,8 +15,8 @@ pip install -r requirements.txt
 ## Использование:
 ## Основные модули и функции
 Модуль widget.py - Основные функции обработки
-from src.widget import mask_account_card, get_date
 ```
+from src.widget import mask_account_card, get_date
 # Маскирование номеров карт и счетов
 masked_card = mask_account_card("Visa Platinum 7000792289606361")
 # Visa Platinum 7000 79** **** 6361
@@ -45,6 +45,15 @@ executed_transactions = filter_by_state(transactions, 'EXECUTED')
 # Сортировка транзакций по дате
 sorted_transactions = sort_by_date(transactions, reverse=True)
 ```
+Модуль generators.py - функции для работы с массивами транзакций
+```
+from src.generators import card_number_generator, filter_by_currency, transaction_descriptions
+
+filter_by_currency — фильтрация транзакций по коду валюты.  
+transaction_descriptions — генератор описаний транзакций.  
+card_number_generator — генератор форматированных номеров карт.  
+```
+
 ## Тестирование
 
 В проекте используется **pytest** для автоматического тестирования функций.
