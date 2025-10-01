@@ -109,3 +109,18 @@ def test_filter_by_currency_none(transactions):
     gbp_list = list(gbp_gen)
 
     assert gbp_list == []
+    
+    
+def test_transaction_descriptions(transactions):
+    gen = transaction_descriptions(transactions)
+    assert next(gen) == "Перевод организации"
+    assert next(gen) == "Перевод со счета на счет"
+    assert next(gen) == "Перевод со счета на счет"
+    assert next(gen) == "Перевод с карты на карту"
+    assert next(gen) == "Перевод организации"
+
+    try:
+        next(gen)
+        assert False, "Должен был возникнуть StopIteration"
+    except StopIteration:
+        pass
