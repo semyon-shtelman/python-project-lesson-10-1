@@ -124,3 +124,29 @@ def test_transaction_descriptions(transactions):
         assert False, "Должен был возникнуть StopIteration"
     except StopIteration:
         pass
+
+
+def test_card_number_generator_count():
+    gen = card_number_generator(1, 5)
+    result = list(gen)
+    assert len(result) == 5
+    
+
+def test_card_number_generator_values():
+    start, stop = 1, 5
+    expected_numbers = [
+        "0000 0000 0000 0001",
+        "0000 0000 0000 0002",
+        "0000 0000 0000 0003",
+        "0000 0000 0000 0004",
+        "0000 0000 0000 0005",
+    ]
+    gen = card_number_generator(start, stop)
+    result = list(gen)
+    assert result == expected_numbers
+
+
+def test_card_number_generator_single():
+    gen = card_number_generator(7, 7)
+    result = list(gen)
+    assert result == ["0000 0000 0000 0007"]
