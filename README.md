@@ -49,11 +49,22 @@ sorted_transactions = sort_by_date(transactions, reverse=True)
 ```
 from src.generators import card_number_generator, filter_by_currency, transaction_descriptions
 
-filter_by_currency — фильтрация транзакций по коду валюты.  
-transaction_descriptions — генератор описаний транзакций.  
-card_number_generator — генератор форматированных номеров карт.  
+# filter_by_currency — фильтрация транзакций по коду валюты.  
+# transaction_descriptions — генератор описаний транзакций.  
+# card_number_generator — генератор форматированных номеров карт.  
 ```
+Модуль decorators.py - декоратор, который позволяет
+автоматически логировать успешное выполнение функций и возникающие ошибки
+в файл, так и в консоль.
+```commandline
+from src.decorators import log
 
+@log(filename="mylog.txt")
+def my_function(x, y):
+    return x + y
+
+my_function(1, 2)
+```
 ## Тестирование
 
 В проекте используется **pytest** для автоматического тестирования функций.
