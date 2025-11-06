@@ -3,7 +3,7 @@ from typing import Any
 
 from requests import Response
 
-from external_api import currency_conversion
+from src.external_api import currency_conversion
 
 
 def open_json_file(path: str) -> list[dict[str, Any]]:
