@@ -40,7 +40,7 @@ def get_transaction_amount(transaction: dict[str, Any]) -> float | None | Respon
         if currency_code == "RUB":
             return amount_value
 
-        converted_amount = currency_conversion(amount_value, currency_code)
+        converted_amount = currency_conversion(transaction)
 
         if converted_amount is not None:
             return converted_amount
