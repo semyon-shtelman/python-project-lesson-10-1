@@ -1,7 +1,7 @@
 import json
 from unittest.mock import mock_open, patch
 
-from src.untils import get_transaction_amount, open_json_file
+from src.utils import get_transaction_amount, open_json_file
 
 
 def test_open_json_file_success_list():
@@ -75,11 +75,11 @@ def test_get_transaction_amount_api():
     """Тест обращения к API если валюта не в рублях"""
     transaction = {"operationAmount": {"amount": "100.00", "currency": {"code": "USD"}}}
 
-    with patch("src.untils.currency_conversion") as mock_conv:
+    with patch("src.utils.currency_conversion") as mock_conv:
         mock_conv.return_value = 8138.00
         result = get_transaction_amount(transaction)
         assert result == 8138.00
-        mock_conv.assert_called_with("100.00", "USD")
+        mock_conv.assert_called_with(transaction)
 
 
 def test_get_transaction_amount_no_transaction():
@@ -92,6 +92,6 @@ def test_get_transaction_amount_conversion_fails():
     """Тест не успешной конвертации валюты"""
     transaction = {"operationAmount": {"amount": "100.00", "currency": {"code": "USD"}}}
 
-    with patch("src.untils.currency_conversion") as mock_conv:
+    with patch("src.utils.currency_conversion") as mock_conv:
         mock_conv.return_value = None
         assert get_transaction_amount(transaction) == 0.0
