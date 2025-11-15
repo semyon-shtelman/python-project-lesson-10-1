@@ -56,7 +56,7 @@ from src.generators import card_number_generator, filter_by_currency, transactio
 Модуль decorators.py - декоратор, который позволяет
 автоматически логировать успешное выполнение функций и возникающие ошибки
 в файл, так и в консоль.
-```commandline
+```
 from src.decorators import log
 
 @log(filename="mylog.txt")
@@ -64,6 +64,35 @@ def my_function(x, y):
     return x + y
 
 my_function(1, 2)
+```
+Модуль csv_excel_manager.py - который позволяет импортировать финансовые операции из CSV и Excel файлов.
+####  Импорт из CSV файлов
+
+Функция `get_transactions_csv()` позволяет считывать данные из CSV файлов.
+
+**Пример использования:**
+```
+from csv_excel_manager import get_transactions_csv
+
+# Чтение операций из CSV файла
+transactions = get_transactions_csv('operations.csv')
+
+for transaction in transactions:
+    print(f"Дата: {transaction['date']}, Сумма: {transaction['amount']}")
+```
+#### Импорт из EXCEL файлов
+
+Функция `get_transactions_excel()` позволяет считывать данные из EXCEL файлов.
+
+**Пример использования:**
+```
+from csv_excel_manager import get_transaction_excel
+
+# Чтение операций из EXCEL файла
+transactions = get_transaction_excel('operations.csv')
+
+for transaction in transactions:
+    print(f"Дата: {transaction['date']}, Сумма: {transaction['amount']}")
 ```
 ## Тестирование
 
