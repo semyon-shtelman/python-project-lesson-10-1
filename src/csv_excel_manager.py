@@ -1,4 +1,5 @@
 import csv
+import json
 from typing import Any
 
 import pandas as pd
@@ -24,9 +25,9 @@ def get_transactions_csv(csv_file_path: str) -> list[dict[str, Any]]:
 
 def get_transactions_excel(excel_file_path: str) -> list[dict[str, Any]]:
     """
-       Считывает финансовые операции из excel файла и
-       возвращает список словарей с транзакциями
-       """
+    Считывает финансовые операции из excel файла и
+    возвращает список словарей с транзакциями
+    """
     try:
         df = pd.read_excel(excel_file_path)
         transactions = df.to_dict(orient="records")
