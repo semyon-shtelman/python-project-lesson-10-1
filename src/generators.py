@@ -10,8 +10,7 @@ def filter_by_currency(transactions: list[dict[str, Any]], currency_code: str) -
     :return: итератор по транзакциям
     """
     return (
-        x for x in transactions if
-        x.get("operationAmount", {}).get("currency", {}).get("code", "") == currency_code
+        x for x in transactions if x.get("operationAmount", {}).get("currency", {}).get("code", "") == currency_code
     )
 
 
