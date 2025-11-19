@@ -16,7 +16,8 @@ def process_bank_search(data: list[dict], search: str) -> list[dict]:
     filtered_data = []
 
     for operation in data:
-        if operation.get("description") and pattern.search(operation["description"]):
+        description = operation.get("description")
+        if description and pattern.search(description):
             filtered_data.append(operation)
 
     return filtered_data
@@ -29,7 +30,16 @@ def process_bank_operations(data: list[dict], categories: list) -> dict:
 
     category_count = defaultdict(int)
 
-    patterns = {category: re.compile(r"\b" + re.escape(category) + r"\b", re.IGNORECASE) for category in categories}
+    for category in categories:
+        category_count[category] = 0
+
+    patterns = {}
+    for category in categories:
+        if category:
+            try:
+                patterns[category] = re.compile(r"\b" + re.escape(category) + r"\b", re.IGNORECASE)
+            except re.error:
+                continue
 
     for operation in data:
         description = operation.get("description", "")
@@ -39,4 +49,5 @@ def process_bank_operations(data: list[dict], categories: list) -> dict:
         for category, pattern in patterns.items():
             if pattern.search(description):
                 category_count[category] += 1
+
     return dict(category_count)
